@@ -1,0 +1,144 @@
+Terraform Task1: 
+
+https://towardsaws.com/automate-ec2-auto-scaling-load-balancer-and-dns-setup-using-terraform-93eff64a44ca
+
+
+
+
+Output : 
+======
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # aws_autoscaling_group.asg will be created
+  + resource "aws_autoscaling_group" "asg" {
+      + arn                              = (known after apply)
+      + availability_zones               = (known after apply)
+      + default_cooldown                 = (known after apply)
+      + desired_capacity                 = 2
+      + force_delete                     = false
+      + force_delete_warm_pool           = false
+      + health_check_grace_period        = 300
+      + health_check_type                = (known after apply)
+      + id                               = (known after apply)
+      + ignore_failed_scaling_activities = false
+      + launch_configuration             = (known after apply)
+      + load_balancers                   = (known after apply)
+      + max_size                         = 3
+      + metrics_granularity              = "1Minute"
+      + min_size                         = 1
+      + name                             = (known after apply)
+      + name_prefix                      = (known after apply)
+      + predicted_capacity               = (known after apply)
+      + protect_from_scale_in            = false
+      + service_linked_role_arn          = (known after apply)
+      + target_group_arns                = (known after apply)
+      + vpc_zone_identifier              = [
+          + "subnet-0f8b23055458ee582",
+        ]
+      + wait_for_capacity_timeout        = "10m"
+      + warm_pool_size                   = (known after apply)
+
+      + availability_zone_distribution (known after apply)
+
+      + launch_template (known after apply)
+
+      + mixed_instances_policy (known after apply)
+
+      + traffic_source (known after apply)
+    }
+
+  # aws_launch_template.lc will be created
+  + resource "aws_launch_template" "lc" {
+      + arn             = (known after apply)
+      + default_version = (known after apply)
+      + id              = (known after apply)
+      + image_id        = "ami-0e2c8caa4b6378d8c"
+      + instance_type   = "t2.micro"
+      + key_name        = "nvn_rag"
+      + latest_version  = (known after apply)
+      + name            = (known after apply)
+      + name_prefix     = (known after apply)
+      + tags_all        = (known after apply)
+
+      + metadata_options (known after apply)
+    }
+
+  # aws_lb.my_lb will be created
+  + resource "aws_lb" "my_lb" {
+      + arn                                                          = (known after apply)
+      + arn_suffix                                                   = (known after apply)
+      + client_keep_alive                                            = 3600
+      + desync_mitigation_mode                                       = "defensive"
+      + dns_name                                                     = (known after apply)
+      + drop_invalid_header_fields                                   = false
+      + enable_deletion_protection                                   = false
+      + enable_http2                                                 = true
+      + enable_tls_version_and_cipher_suite_headers                  = false
+      + enable_waf_fail_open                                         = false
+      + enable_xff_client_port                                       = false
+      + enforce_security_group_inbound_rules_on_private_link_traffic = (known after apply)
+      + id                                                           = (known after apply)
+      + idle_timeout                                                 = 60
+      + internal                                                     = false
+      + ip_address_type                                              = (known after apply)
+      + load_balancer_type                                           = "application"
+      + name                                                         = "my-load-balancer"
+      + name_prefix                                                  = (known after apply)
+      + preserve_host_header                                         = false
+      + security_groups                                              = (known after apply)
+      + subnets                                                      = [
+          + "subnet-07c9c95ba8970800f",
+          + "subnet-0f8b23055458ee582",
+        ]
+      + tags_all                                                     = (known after apply)
+      + vpc_id                                                       = (known after apply)
+      + xff_header_processing_mode                                   = "append"
+      + zone_id                                                      = (known after apply)
+
+      + subnet_mapping (known after apply)
+    }
+
+  # aws_route53_record.dns will be created
+  + resource "aws_route53_record" "dns" {
+      + allow_overwrite = (known after apply)
+      + fqdn            = (known after apply)
+      + id              = (known after apply)
+      + name            = "nvnrag321.com"
+      + type            = "A"
+      + zone_id         = "Z08649022WAE3HGH4I0BM"
+
+      + alias {
+          + evaluate_target_health = false
+          + name                   = (known after apply)
+          + zone_id                = (known after apply)
+        }
+    }
+
+Plan: 4 to add, 0 to change, 0 to destroy.
+
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value: yes
+
+aws_lb.my_lb: Creating...
+aws_launch_template.lc: Creating...
+aws_launch_template.lc: Creation complete after 8s [id=lt-0c58f5056298020c8]
+aws_autoscaling_group.asg: Creating...
+aws_lb.my_lb: Still creating... [10s elapsed]
+aws_lb.my_lb: Still creating... [20s elapsed]
+aws_lb.my_lb: Still creating... [30s elapsed]
+aws_lb.my_lb: Still creating... [40s elapsed]
+aws_lb.my_lb: Still creating... [50s elapsed]
+aws_lb.my_lb: Still creating... [1m0s elapsed]
+aws_lb.my_lb: Still creating... [1m10s elapsed]
+aws_lb.my_lb: Still creating... [1m20s elapsed]
+aws_lb.my_lb: Still creating... [1m30s elapsed]
+aws_lb.my_lb: Still creating... [1m40s elapsed]
+aws_lb.my_lb: Still creating... [1m50s elapsed]
+aws_lb.my_lb: Still creating... [2m0s elapsed]
+aws_lb.my_lb: Still creating... [2m10s elapsed]
